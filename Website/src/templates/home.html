@@ -1,0 +1,368 @@
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    /* margin-left: 10px; */
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .sen a{
+    padding: 3px 10px 3px 10px;
+  }
+  .sen>a:hover{
+    color: #fff;
+    background: #e22a6f;
+  }
+  #Sensor1{
+    display: block;
+  
+  }
+  #Sensor2{
+    display: none;
+  }
+  </style>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="breadcrumb-wrapper row">
+      <div class="col-12 col-lg-3 col-md-6">
+        <h4 class="page-title">Dashboard</h4>
+      </div>
+      <div class="col-12 col-lg-9 col-md-6">
+        <ol class="breadcrumb float-right">
+            <div class="dropdown" style="width: 200px;">
+              <span class = "page-title" style="font-size: 20px;"><b>Sensor</b></span>
+              <div class="dropdown-content sen">
+                <a href="#Sensor1" onclick="sensor_display(1)">Sensor-1 (Outdoor)</a>
+                <a href="#Sensor2" onclick="sensor_display(2)">Sensor-2 (Indoor)</a>
+              </div>
+            </div> 
+            </ol>
+        </div>
+    </div>
+  </div>
+
+  <section id="Sensor1">
+  <div class="container-fluid">
+    <div class="card-group">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex no-block align-items-center">
+                <div>
+                  <div class="icon"></i></div>
+                  <p class="text-muted">Temperature</p>
+                </div>
+                <div class="ml-auto">
+                  <h2 class="counter text-success">
+                    {{ data['feeds'][0]['field1'] }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar"
+                  style="width: {{ data['feeds'][0]['field1'] }}%; height: 6px" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex no-block align-items-center">
+                <div>
+                  <div class="icon">
+                    
+                  </div>
+                  <p class="text-muted">Humidity</p>
+                </div>
+                <div class="ml-auto">
+                  <h2 class="counter text-primary">
+                    {{ data['feeds'][0]['field2'] }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="progress">
+                <div class="progress-bar bg-primary" role="progressbar"
+                  style="width: {{ data['feeds'][0]['field2'] }}%; height: 6px" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex no-block align-items-center">
+                <div>
+                  <div class="icon">
+                    
+                  </div>
+                  <p class="text-muted">PM2.5</p>
+                </div>
+                <div class="ml-auto">
+                  <h2 class="counter" style="color: green;">
+                    {{ data['feeds'][0]['field3'] }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                  style="width: {{ data['feeds'][0]['field3'] }}%;background-color: rgb(255, 123, 0); height: 6px"
+                  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex no-block align-items-center">
+                <div>
+                  
+                  <p class="text-muted">PM10</p>
+                </div>
+                <div class="ml-auto">
+                  <h2 class="counter" style="color: blue;">
+                    {{ data['feeds'][0]['field4'] }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                  style="width: {{ data['feeds'][0]['field4'] }}%; background-color: brown; height: 6px"
+                  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+        <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+        src="https://thingspeak.com/channels/2341773/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+        <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+        src="https://thingspeak.com/channels/2341773/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+        <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+        src="https://thingspeak.com/channels/2341773/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+        <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+        src="https://thingspeak.com/channels/2341773/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-12 stretch-card" style="padding: 0">
+          <div class="card">
+            <div class="card-body">
+              <div class="sales-info">
+                <h3 style="color: {{ aqi1[1] }};">{{ aqi1[0] }}</h3>
+                <span>
+                  <i class="lni-thought"></i>&nbsp;AQI
+                </span>
+              </div>
+              <div class="progress progress-sm">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ aqi1[0] }}" style="width: {{ aqi1[0]/10 }}%; background-color: {{ aqi1[1] }}"></div>
+              </div>
+              <p>{{ aqi1[2] }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+<section id="Sensor2">
+<div class="container-fluid">
+  <div class="card-group">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                <div class="icon"></div>
+                <p class="text-muted">Temperature</p>
+              </div>
+              <div class="ml-auto">
+                <h2 class="counter text-success">
+                  {{ data2['feeds'][0]['field1'] }}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div class="progress-bar bg-success" role="progressbar"
+                style="width: {{ data2['feeds'][0]['field1'] }}%; height: 6px" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                <div class="icon">
+                  
+                </div>
+                <p class="text-muted">Humidity</p>
+              </div>
+              <div class="ml-auto">
+                <h2 class="counter text-primary">
+                  {{ data2['feeds'][0]['field2'] }}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div class="progress-bar bg-primary" role="progressbar"
+                style="width: {{ data2['feeds'][0]['field2'] }}%; height: 6px" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                <div class="icon">
+                  
+                </div>
+                <p class="text-muted">PM2.5</p>
+              </div>
+              <div class="ml-auto">
+                <h2 class="counter" style="color: green;">
+                  {{ data2['feeds'][0]['field3'] }}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"
+                style="width: {{ data2['feeds'][0]['field3'] }}%;background-color: rgb(255, 123, 0); height: 6px"
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                
+                <p class="text-muted">PM10</p>
+              </div>
+              <div class="ml-auto">
+                <h2 class="counter" style="color: blue;">
+                  {{ data2['feeds'][0]['field4'] }}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"
+                style="width: {{ data2['feeds'][0]['field4'] }}%; background-color: brown; height: 6px"
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-12 stretch-card" style="padding: 0">
+        <div class="card">
+          <div class="card-body">
+            <div class="sales-info">
+              <h3 style="color: {{ aqi2[1] }};">{{ aqi2[0] }}</h3>
+              <span>
+                <i class="lni-thought"></i>&nbsp;AQI
+              </span>
+            </div>
+            <div class="progress progress-sm">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{ aqi2[0] }}" style="width: {{ aqi2[0]/10 }}%; background-color: {{ aqi2[1] }}"></div>
+            </div>
+            <p>{{ aqi2[2] }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div>
+      <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+      src="https://thingspeak.com/channels/2341776/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+      <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+      src="https://thingspeak.com/channels/2341776/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+      <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+      src="https://thingspeak.com/channels/2341776/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+      <iframe width="430" loading="lazy" height="260" style="border: 1px solid #cccccc"
+      src="https://thingspeak.com/channels/2341776/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+  </div>
+
+</div>
+</section>
+
+
+<script>
+  setTimeout(() => {
+  console.log("Delayed for 1 second.");
+  location.reload();
+},"15000");
+function sensor_display(num){
+  if(num == 2){
+    document.getElementById("Sensor1").style.display = "none";
+    document.getElementById("Sensor2").style.display = "block";
+  }
+  else{
+    document.getElementById("Sensor1").style.display = "block";
+    document.getElementById("Sensor2").style.display = "none";
+  }
+}
+</script>

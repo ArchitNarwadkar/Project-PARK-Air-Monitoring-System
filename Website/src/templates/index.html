@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Project PARK</title>
+  <link href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='fonts/line-icons.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='elements/morris/morris.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='styles/responsive.css') }}" rel="stylesheet" />
+
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.app.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+<!-- <script src="{{ url_for('static', filename='js/morris.init.js') }}"></script> -->
+
+<script src="{{ url_for('static', filename='elements/morris/morris.min.js') }}"></script>
+<script src="{{ url_for('static', filename='elements/morris/raphael-min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashborad1.js') }}"></script>
+</head>
+
+<body>
+  <div class="app header-default side-nav-dark">
+    <div class="layout">
+      <div class="header navbar">
+        <div class="header-container">
+          <div class="nav-logo">
+            <a href="/">
+              <b><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"
+                  style="width: 50px;mix-blend-mode: multiply;" /></b>
+              <span class="logo" style="color: blue">
+                PROJECT&nbsp;PARK
+              </span>
+            </a>
+          </div>
+          <ul class="nav-left">
+            <li>
+              <a class="sidenav-fold-toggler" href="javascript:void(0);">
+                <i class="lni-menu"></i>
+              </a>
+              <a class="sidenav-expand-toggler" href="javascript:void(0);">
+                <i class="lni-menu"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav-right">
+            <li class="notifications dropdown dropdown-animated scale-left">
+              {% if notifications[0] %}
+              <span class="counter" style="padding: 5px;margin: 8px 0 10px 0;"></span>
+              {% endif %}
+              <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="lni-alarm"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-lg">
+                <li>
+                  <h5 class="n-title text-center">
+                    <i class="lni-alarm"></i>
+                    <span>Notifications</span>
+                  </h5>
+                </li>
+                <li>
+                  <ul class="list-media">
+                    <li class="list-item">
+                      {% for i in notifications %}
+                      {% if i != notifications[-1] %}
+                      <a href="/alerts" class="media-hover">
+                        <div class="media-img">
+                          <div class="icon-avatar bg-primary">
+                            <i class="lni-envelope"></i>
+                          </div>
+                        </div>
+                        <div class="info">
+                          <span class="title">{{ i[2] }}</span>
+                          <span class="sub-title">{{ notifications[-1][loop.index-1] }} ago</span>
+                        </div>
+                      </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if notifications == [[]] %}
+                    <li class="list-item">
+                      <div class="info">
+                        <span class="sub-title" style="margin-left: 40px;">No Notifications</span>
+                      </div>
+
+                    </li>
+                    {% endif %}
+                  </ul>
+                </li>
+                {% if notifications != [[]] %}
+                <li class="check-all text-center">
+                  <span>
+                    <a href="/alerts" class="text-gray">Check all notifications</a>
+                  </span>
+                </li>
+                {% endif %}
+              </ul>
+            </li>
+            <li class="user-profile dropdown dropdown-animated scale-left">
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown">
+              
+              </a>
+              <ul class="dropdown-menu dropdown-md">
+                <li>
+                  <ul class="list-media">
+                    <li class="list-item avatar-info">
+                      <div class="media-img">
+          
+                      </div>
+                      <div class="info">
+                        <span class="title text-semibold">User1</span>
+                        <span class="sub-title">User2</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <a href="/settings">
+                    <i class="lni-cog"></i>
+                    <span>Setting</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/logout">
+                    <i class="lni-lock"></i>
+                    <span>Logout</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="side-nav expand-lg">
+        <div class="side-nav-inner">
+          <ul class="side-nav-menu">
+            <li class="side-nav-header">
+              <span>Navigation</span>
+            </li>
+            <li class="nav-item dropdown {{ open1 }}">
+              <a href="/home" class="dropdown-toggle">
+                <span class="icon-holder">
+                  <i class="lni-home"></i>
+                </span>
+                <span class="title">Home</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown {{ open2 }}">
+              <a class="dropdown-toggle" href="/statistics/Sensor1">
+                <span class="icon-holder">
+                  <i class="lni-bar-chart"></i>
+                </span>
+                <span class="title">Statistics</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown {{ open4 }}">
+              <a class="dropdown-toggle" href="/circuit">
+                <span class="icon-holder">
+                  <i class="lni-vector"></i>
+                </span>
+                <span class="title">Circuit</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="page-container">
+        {% include file %}
+        <footer class="content-footer">
+          <div class="footer">
+            <div class="copyright">
+              <span>Copyright © 2023 All Right Reserved
+              </span>
+              <span class="go-right">
+                <a href="/about" class="text-gray" style="padding: 0 20px 0 0;">Term &amp; Conditions</a>
+                <a href="/about" class="text-gray" style="padding: 0 20px 0 0;">Privacy &amp; Policy</a>
+              </span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="preloader">
+    <div class="loader" id="loader-1"></div>
+  </div>
+</body>
+
+
+
+</html>
