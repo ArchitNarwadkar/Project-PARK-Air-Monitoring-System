@@ -1,17 +1,17 @@
-#Project PARK Air Monitoring System
+# Project PARK Air Monitoring System
 
-##Repository Structure and Descriptions
+## Repository Structure and Descriptions
 
-###Data Calibration
+### Data Calibration
 Contains codes for calibrating new sensors using the Aeroqual sensor.
 
-###Data Preprocessing
+### Data Preprocessing
 Holds codes for:
 Extracting data from ThingSpeak.
 Pre-processing using standard methods (like interquartile range and linear interpolation).
 Storing data in a suitable format for website display.
 
-###Website
+### Website
 Includes:
 Python server code to run the website locally.
 Images and assets in the static folder.
